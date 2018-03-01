@@ -46,8 +46,9 @@ def gameOver():
 	GOrect = GOsurf.get_rect()
 	GOrect.midtop = (360, 15)
 	playSurface.blit(GOsurf,GOrect) ##This too
-	pygame.display.flip()  ##Discuss this in detail
 	showScore(2)
+	pygame.display.flip()  ##Discuss this in detail
+	
 	time.sleep(1)
 	pygame.quit()	#pygame exit
 	sys.exit() 	#console exit
@@ -62,7 +63,7 @@ def showScore(choice=1):
 		Srect.midtop = (360, 120)
 
 	playSurface.blit(Ssurf, Srect)
-	pygame.display.flip()
+	
 
 # Main Logic
 
@@ -81,7 +82,7 @@ while True:
 			if event.key == pygame.K_RIGHT or event.key == ord('w'):
 				changeto = 'UP'
 			if event.key == pygame.K_ESCAPE:
-				pygame.event.post(pygame.event.Event(QUIT))
+				pygame.event.post(pygame.event.Event(pygame.QUIT))
 			
 			
 	if changeto == 'RIGHT' and not direction == 'LEFT':
@@ -133,8 +134,9 @@ while True:
 		for block in snakeBody[1:]:
 			if snakePos[0] == block[0] and snakePos[1] == block[1]:
 				gameOver()
-	pygame.display.flip()
+	
 	showScore(1)
+	pygame.display.flip()
 	fpsController.tick(25)
 
 
