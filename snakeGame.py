@@ -38,6 +38,7 @@ direction = 'RIGHT'
 changeto = direction
 
 #Game over function
+score = 0;    
 
 def gameOver():
 	myFont = pygame.font.SysFont('monaco', 72)
@@ -46,12 +47,22 @@ def gameOver():
 	GOrect.midtop = (360, 15)
 	playSurface.blit(GOsurf,GOrect) ##This too
 	pygame.display.flip()  ##Discuss this in detail
-	time.sleep(1	)
+	showScore(2)
+	time.sleep(1)
 	pygame.quit()	#pygame exit
 	sys.exit() 	#console exit
 
-	def showScore():
-		sFont = pygame.font.SysFont('monaco' 24)
+def showScore(choice=1):
+	sFont = pygame.font.SysFont('monaco', 24)
+	Ssurf = sFont.render('Score: {0}'.format(score), True, black)
+	Srect = Ssurf.get_rect()
+	if choice == 1:
+		Srect.midtop = (80, 10)
+	else:
+		Srect.midtop = (360, 120)
+
+	playSurface.blit(Ssurf, Srect)
+	pygame.display.flip()
 
 # Main Logic
 
@@ -95,6 +106,7 @@ while True:
 	#Snake body mech
 	snakeBody.insert(0, list(snakePos))
 	if snakePos[0] == foodPos[0] and snakePos[1] == foodPos[1]:
+		score += 1
 		foodSpawn = False
 	else:
 		snakeBody.pop()
@@ -122,8 +134,8 @@ while True:
 			if snakePos[0] == block[0] and snakePos[1] == block[1]:
 				gameOver()
 	pygame.display.flip()
+	showScore(1)
 	fpsController.tick(25)
-
 
 
 
